@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/checkout.css">
+  <title>Checkout - Abalifer</title>
+  
+</head>
+
+<body>
+  
+  <header>
+    
+    <h1>
+      Finalizar Compra
+    </h1>
+    <a href="carrito.html">
+      ← Back
+    </a>
+  </header>
+  
+  <div class="container">
+    
+    <div class="formulario">
+      
+      <h2>
+        Información de envío
+      </h2>
+      
+      <input type="text" id="cliente" placeholder="Nombre completo">
+      
+      <input type="email" id="email" placeholder="Correo">
+      
+      <input type="text" id="direccion" placeholder="Dirección">
+      
+      <input type="text" id="ciudad" placeholder="Ciudad">
+      
+      <input type="text" id="estado" placeholder="Estado">
+      
+      <select id="metodoPago">
+      
+        <option>
+          Tarjeta de Crédito
+        </option>
+        
+        <option>
+          PayPal
+        </option>
+        
+        <option>
+          Pago al Entrega
+        </option>
+        
+      </select>
+      
+      <button onclick="finalizarCompra()">
+      
+        Confirmar Pedido
+        
+      </button>
+      
+    </div>
+    
+    <div class="resumen">
+      
+      <h2>
+        Resumen del Pedido
+      </h2>
+      
+      <div id="listaProductos">
+      </div>
+      
+      <div class="total">
+        
+        $<span id="total">
+          0
+        </span>
+        
+      </div>
+      
+    </div>
+    
+  </div>
+  
+  <script src="js/checkout.js">
+  </script>
+</body>
+
+</html>
