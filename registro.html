@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Registro - Abalifer</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+
+background:#f3f3f3;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+height:100vh;
+
+}
+
+.container{
+
+width:450px;
+
+background:white;
+
+padding:30px;
+
+border-radius:10px;
+
+box-shadow:
+0 2px 10px rgba(0,0,0,.1);
+
+}
+
+.logo{
+
+text-align:center;
+
+font-size:40px;
+
+font-weight:bold;
+
+margin-bottom:20px;
+
+}
+
+.logo span{
+
+color:#00c853;
+
+}
+
+input{
+
+width:100%;
+
+padding:12px;
+
+margin-bottom:15px;
+
+border:1px solid #ccc;
+
+border-radius:5px;
+
+}
+
+button{
+
+width:100%;
+
+padding:12px;
+
+border:none;
+
+border-radius:20px;
+
+background:#ffd814;
+
+cursor:pointer;
+
+font-size:16px;
+
+font-weight:bold;
+
+}
+
+button:hover{
+
+background:#f7ca00;
+
+}
+
+.link{
+
+text-align:center;
+
+margin-top:20px;
+
+}
+
+a{
+
+text-decoration:none;
+
+color:#0066c0;
+
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<div class="logo">
+
+Abali<span>fer</span>
+
+</div>
+
+<h2>
+Crear Cuenta
+</h2>
+
+<input
+type="text"
+id="nombre"
+placeholder="Nombre completo">
+
+<input
+type="email"
+id="email"
+placeholder="Correo electrónico">
+
+<input
+type="password"
+id="password"
+placeholder="Contraseña">
+
+<input
+type="password"
+id="confirmar"
+placeholder="Confirmar contraseña">
+
+<button onclick="registrar()">
+
+Crear Cuenta
+
+</button>
+
+<div class="link">
+
+¿Ya tienes cuenta?
+
+<a href="login.html">
+
+Iniciar sesión
+
+</a>
+
+</div>
+
+</div>
+
+<script>
+
+function registrar(){
+
+const nombre =
+document.getElementById(
+"nombre"
+).value.trim();
+
+const email =
+document.getElementById(
+"email"
+).value.trim();
+
+const password =
+document.getElementById(
+"password"
+).value;
+
+const confirmar =
+document.getElementById(
+"confirmar"
+).value;
+
+if(
+!nombre ||
+!email ||
+!password
+){
+
+alert(
+"Completa todos los campos"
+);
+
+return;
+
+}
+
+if(password !== confirmar){
+
+alert(
+"Las contraseñas no coinciden"
+);
+
+return;
+
+}
+
+const usuarios =
+JSON.parse(
+localStorage.getItem(
+"usuarios"
+)
+) || [];
+
+const existe =
+usuarios.find(
+u => u.email === email
+);
+
+if(existe){
+
+alert(
+"Este correo ya está registrado"
+);
+
+return;
+
+}
+
+usuarios.push({
+
+nombre,
+email,
+password
+
+});
+
+localStorage.setItem(
+"usuarios",
+JSON.stringify(usuarios)
+);
+
+alert(
+"Cuenta creada correctamente"
+);
+
+window.location.href =
+"login.html";
+
+}
+
+</script>
+
+</body>
+</html>

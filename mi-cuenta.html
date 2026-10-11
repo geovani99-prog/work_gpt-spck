@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="mi-cuenta.css">
+<title>Mi Cuenta - Abalifer</title>
+</head>
+
+
+<body>
+
+<header>
+
+<h1>
+👤 Mi Cuenta
+</h1>
+
+<a href="../index.html">
+
+← Volver a la Tienda
+
+</a>
+
+<a href="../menu/menu.html">menu</a>
+
+</header>
+
+
+<div class="container">
+
+<div class="card">
+
+<h2>
+Información Personal
+</h2>
+
+<div id="usuarioInfo">
+</div>
+
+<button
+class="logout"
+onclick="logout()">
+
+Cerrar Sesión
+
+</button>
+
+</div>
+
+<div class="stats">
+
+<div class="stat">
+
+<h3>
+Pedidos
+</h3>
+
+<div
+class="number"
+id="totalPedidos">
+
+0
+
+</div>
+
+</div>
+
+<div class="stat">
+
+<h3>
+Total Gastado
+</h3>
+
+<div
+class="number"
+id="totalGastado">
+
+$0
+
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>
+📦 Historial de Pedidos
+</h2>
+
+<div id="pedidos">
+</div>
+
+</div>
+
+</div>
+
+<script src="mi-cuenta.js"></script>
+</body>
+</html>
