@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Gestión de Pedidos</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#eaeded;
+}
+
+header{
+
+background:#131921;
+color:white;
+
+padding:20px;
+
+}
+
+.container{
+
+max-width:1400px;
+
+margin:20px auto;
+
+padding:20px;
+
+}
+
+.card{
+
+background:white;
+
+padding:20px;
+
+border-radius:10px;
+
+margin-bottom:20px;
+
+box-shadow:
+0 2px 8px rgba(0,0,0,.1);
+
+}
+
+.pedido{
+
+padding:20px;
+
+border-bottom:
+1px solid #ddd;
+
+}
+
+.pedido:last-child{
+
+border-bottom:none;
+
+}
+
+.estado{
+
+padding:8px 15px;
+
+border-radius:20px;
+
+border:none;
+
+font-weight:bold;
+
+}
+
+select{
+
+padding:10px;
+
+border-radius:5px;
+
+margin-top:10px;
+
+}
+
+.producto{
+
+margin-left:20px;
+
+margin-top:5px;
+
+}
+
+.total{
+
+font-size:22px;
+
+font-weight:bold;
+
+color:#B12704;
+
+margin-top:10px;
+
+}
+
+.guardar{
+
+background:#00c853;
+
+color:white;
+
+border:none;
+
+padding:10px 20px;
+
+border-radius:5px;
+
+cursor:pointer;
+
+margin-top:10px;
+
+}
+
+</style>
+
+</head>
+<body>
+
+<header>
+
+<h1>
+📦 Gestión de Pedidos
+</h1>
+
+<a href="../menu/menu.html">
+  ← Back To Menu
+</a>
+
+
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h2>
+Todos los Pedidos
+</h2>
+
+<div id="listaPedidos">
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+let pedidos =
+JSON.parse(
+localStorage.getItem(
+"pedidos"
+)
+) || [];
+
+const lista =
+document.getElementById(
+"listaPedidos"
+);
+
+function renderizar(){
+
+lista.innerHTML = "";
+
+if(
+pedidos.length === 0
+){
+
+lista.innerHTML = `
+
+<h3>
+No hay pedidos registrados
+</h3>
+
+`;
+
+return;
+
+}
+
+pedidos
+.slice()
+.reverse()
+.forEach(
+(pedido,index)=>{
+
+let productosHTML = "";
+
+pedido.productos.forEach(
+producto=>{
+
+productosHTML += `
+
+<div class="producto">
+
+• ${producto.nombre}
+x ${producto.cantidad}
+
+</div>
+
+`;
+
+});
+
+lista.innerHTML += `
+
+<div class="pedido">
+
+<p>
+
+<strong>Cliente:</strong>
+
+${pedido.cliente}
+
+</p>
+
+<p>
+
+<strong>Email:</strong>
+
+${pedido.email}
+
+</p>
+
+<p>
+
+<strong>Fecha:</strong>
+
+${pedido.fecha}
+
+</p>
+
+<p>
+
+<strong>Método de Pago:</strong>
+
+${pedido.metodoPago}
+
+</p>
+
+${productosHTML}
+
+<div class="total">
+
+Total:
+$${pedido.total}
+
+</div>
+
+<select
+id="estado-${index}">
+
+<option
+${pedido.estadoPedido === "Pendiente" ? "selected" : ""}>
+
+Pendiente
+
+</option>
+
+<option
+${pedido.estadoPedido === "Procesando" ? "selected" : ""}>
+
+Procesando
+
+</option>
+
+<option
+${pedido.estadoPedido === "Enviado" ? "selected" : ""}>
+
+Enviado
+
+</option>
+
+<option
+${pedido.estadoPedido === "Entregado" ? "selected" : ""}>
+
+Entregado
+
+</option>
+
+</select>
+
+<br>
+
+<button
+class="guardar"
+onclick="guardarEstado(${index})">
+
+Guardar Estado
+
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+function guardarEstado(index){
+
+const nuevoEstado =
+document.getElementById(
+`estado-${index}`
+).value;
+
+const indiceReal =
+pedidos.length - 1 - index;
+
+pedidos[indiceReal]
+.estadoPedido =
+nuevoEstado;
+
+localStorage.setItem(
+"pedidos",
+JSON.stringify(pedidos)
+);
+
+alert(
+"Estado actualizado"
+);
+
+renderizar();
+
+}
+
+renderizar();
+
+</script>
+
+</body>
+</html>
